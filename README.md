@@ -25,16 +25,17 @@ This local server listens only on `127.0.0.1`, so it is not exposed to the local
 
 ## Online multiplayer
 
-Online play uses a hosted HTTPS service, so other players connect to the host service rather than to your PC. The deployment configuration in `render.yaml` runs the game and room API together; multiplayer uses only Python's standard library.
+Online play uses a hosted HTTPS service, so other players connect to the host service rather than to your PC. The Railway deployment uses the included `Dockerfile` to extract `fastroads-source-posix.zip` and run the game and room API together; multiplayer uses only Python's standard library.
 
 Before deploying, make sure you have permission to host and redistribute every original game file and asset in this project. Do not publish or deploy the copied game bundle without that permission.
 
-1. If you have permission, create a ZIP named `fastroads-source-posix.zip` containing the project files and folders (including `static/`) and add it with `render.yaml` to a GitHub repository. Do not include `.venv/` or `.vscode/`.
-2. Create a Render account, choose **New → Blueprint**, and connect that repository. Its build step extracts `fastroads-source-posix.zip`; the service then runs the included Python server.
-3. Open the HTTPS URL Render assigns to the service and share that same URL with everyone who will play. No one should use `127.0.0.1` to join someone else's game.
-4. In the hosted game, open **Multiplayer**. Create a room and share its code, or enter the code to join. Everyone must use the same seed, scene, and terrain preset.
+1. If you have permission, create a ZIP named `fastroads-source-posix.zip` containing the project files and folders (including `static/`). Keep the folder paths in the archive and do not include `.venv/` or `.vscode/`.
+2. Push the ZIP, `Dockerfile`, and `railway.json` to the root of a GitHub repository.
+3. In Railway, create a project from that GitHub repository and deploy it. Railway detects the included `Dockerfile`; the image extracts the archive and starts the Python server on Railway's assigned port.
+4. In the Railway service settings, generate a public domain. Open that HTTPS URL and share it with everyone who will play. No one should use `127.0.0.1` to join someone else's game.
+5. In the hosted game, open **Multiplayer**. Create a room and share its code, or enter the code to join. Everyone must use the same seed, scene, and terrain preset.
 
-Rooms support up to 12 players. A disconnected player is removed after about two minutes; empty rooms are then cleared. Room state is held in memory and disappears when the hosted service restarts or redeploys. Keep the Render service to a single instance so all players use the same in-memory rooms.
+Rooms support up to 12 players. A disconnected player is removed after about two minutes; empty rooms are then cleared. Room state is held in memory and disappears when the hosted service restarts or redeploys. Keep the Railway service to a single replica so all players use the same in-memory rooms.
 
 For local solo play, `run-fastroads.bat` starts the server on port 8000. Close older server windows before starting it; older versions of the server listened on every network interface. The current launcher warns if an old server is still running.
 
