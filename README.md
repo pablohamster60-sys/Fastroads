@@ -29,8 +29,8 @@ Online play uses a hosted HTTPS service, so other players connect to the host se
 
 Before deploying, make sure you have permission to host and redistribute every original game file and asset in this project. Do not publish or deploy the copied game bundle without that permission.
 
-1. If you have permission, create a ZIP named `fastroads-source.zip` containing the project files and folders (including `static/`) and add it with `render.yaml` to a GitHub repository. Do not include `.venv/` or `.vscode/`.
-2. Create a Render account, choose **New → Blueprint**, and connect that repository. Its build step extracts `fastroads-source.zip`; the service then runs the included Python server.
+1. If you have permission, create a ZIP named `fastroads-source-posix.zip` containing the project files and folders (including `static/`) and add it with `render.yaml` to a GitHub repository. Do not include `.venv/` or `.vscode/`.
+2. Create a Render account, choose **New → Blueprint**, and connect that repository. Its build step extracts `fastroads-source-posix.zip`; the service then runs the included Python server.
 3. Open the HTTPS URL Render assigns to the service and share that same URL with everyone who will play. No one should use `127.0.0.1` to join someone else's game.
 4. In the hosted game, open **Multiplayer**. Create a room and share its code, or enter the code to join. Everyone must use the same seed, scene, and terrain preset.
 
