@@ -3,7 +3,7 @@ services:
     name: fastroads-multiplayer
     runtime: python
     plan: free
-    buildCommand: python -c "import zipfile; archive=zipfile.ZipFile('fastroads-source.zip'); archive.extractall('.'); archive.close()"
+    buildCommand: python -c "import zipfile; archive=zipfile.ZipFile('fastroads-source-posix.zip'); archive.extractall('.'); archive.close()"
     startCommand: python multiplayer_server.py
     envVars:
       - key: FASTROADS_HOST
